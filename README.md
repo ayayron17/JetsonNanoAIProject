@@ -34,27 +34,27 @@ tar xzf cat_dog.tar.gz
 
 1.2: Gather a Dataset
 
-I downloaded 7 datasets from images.cv (battery, cardboard, carton, glass, metal, paper, plastic)
+> I downloaded 7 datasets from images.cv (battery, cardboard, carton, glass, metal, paper, plastic)
 
-Take your own pictures of any trash you wish to train or find datasets on the Internet.
+> Take your own pictures of any trash you wish to train or find datasets on the Internet.
 
-I uploaded the datasets onto my Drive and imported the files into Google Colab.
+> I uploaded the datasets onto my Drive and imported the files into Google Colab.
 
 1.3 Sort out the Dataset Files
 
-Under pytorch-classification/data create a new folder called 'total_data'.
+> Under pytorch-classification/data create a new folder called 'total_data'.
 
-Within the new folder, create 3 new folders (test, train, val)
+> Within the new folder, create 3 new folders (test, train, val)
 
-Through the imported Google Drive, drag folders containing the images you downloaded for the dataset.
+> Through the imported Google Drive, drag folders containing the images you downloaded for the dataset.
 
-Have most images go to train, some to val and the least to test.
+> Have most images go to train, some to val and the least to test.
 
 1.4 Train the Model
 
-Run this command but replace both 'cat_dog' with 'total_data'
+> Run this command but replace both 'cat_dog' with 'total_data'
 
-This command will train the model and automatically stop at 34 epochs.
+> This command will train the model and automatically stop at 34 epochs.
 
 ```bash
 cd pytorch-classification
@@ -73,21 +73,21 @@ python3 train.py -b 30 --model-dir=models/total_data data/total_data
 
 2.1: Download the Model from Google Colab
 
-Navigate to pytorch-classification/models/total_data
+> Navigate to pytorch-classification/models/total_data
 
-Download the file named 'model_best.pth.tar'
+> Download the file named 'model_best.pth.tar'
 
 2.2 Upload the Model to VSCode
 
-Navigate to jetson-inference/python/training/classification/models
+> Navigate to jetson-inference/python/training/classification/models
 
-Create a new folder called 'final_model'
+> Create a new folder called 'final_model'
 
-Upload the model 'model_best.pth.tar' into the folder 'final_model'
+> Upload the model 'model_best.pth.tar' into the folder 'final_model'
 
 2.3 Convert the Model to ONNX File
 
-Change directories into jetson-inference/python/training/classification with:
+> Change directories into jetson-inference/python/training/classification with:
 
 ```bash
 cd pytorch-classification/python/training/classification
@@ -110,7 +110,7 @@ Inside the 'labels.txt' file, list the objects you trained to your model in alph
 
 My 'labels.txt' file consists of:
 
-```bash
+```text
 battery
 cardboard
 carton
@@ -125,17 +125,17 @@ plastic
 
 4.1: Gather a Small Testing Dataset 
 
-Take pictures of the objects of the datasets you want to test to the model.
+> Take pictures of the objects of the datasets you want to test to the model.
 
 4.2: Upload the Testing Dataset to VSCode
 
-Create a new folder under jetson-inference/python/training/classification called 'test_images'
+> Create a new folder under jetson-inference/python/training/classification called 'test_images'
 
-Upload each picture to the new folder 'test_images'
+> Upload each picture to the new folder 'test_images'
 
 4.3: Transfer the Model Percentages onto the Testing Dataset
 
-Change directories into jetson-inference/python/training/classification with:
+> Change directories into jetson-inference/python/training/classification with:
 
 ```bash
 cd pytorch-classification/python/training/classification
@@ -151,9 +151,9 @@ imagenet.py --model=$models/final_model/resnet18.onnx --input_blob=input_0 --out
 
 4.4: Find the Final Model-Implemented Image
 
-The image 'test1.jpg' will be under jetson-inference/python/training/classification folders
+> The image 'test1.jpg' will be under jetson-inference/python/training/classification folders
 
-Click on the file to see the new image with the percentage and type of object the models detects.
+> Click on the file to see the new image with the percentage and type of object the models detects.
 
 ---
 
@@ -161,7 +161,7 @@ Click on the file to see the new image with the percentage and type of object th
 
 5.1: Changing the imagenet.py File
 
-Navigate to jetson-inference/python/examples and click on the imagenet.py file
+> Navigate to jetson-inference/python/examples and click on the imagenet.py file
 
 Comment out Line 49:
 
@@ -177,15 +177,15 @@ net = imageNet(model="models/final_model/resnet18.onnx", labels="data/labels.txt
 
 5.2: Connect to Jetson Nano Headit Mode
 
-Plug in the HDMI cable to a TV, desktop or laptop to display your Jetson Nano
+> Plug in the HDMI cable to a TV, desktop or laptop to display your Jetson Nano
 
-In addition, make sure a video camera is connected into one of the USB ports.
+> In addition, make sure a video camera is connected into one of the USB ports.
 
 5.3: Play the Live Video
 
-Once logged in to the Jetson Nano, find the LX Terminal
+> Once logged in to the Jetson Nano, find the LX Terminal
 
-In the Terminal, run the command:
+> In the Terminal, run the command:
 
 ```bash
 ./imagenet.py /dev/video0
