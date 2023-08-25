@@ -1,5 +1,6 @@
 # JetsonNanoAIProject
 ## My project goal is to recognize different types of trash whether to recycle or put it in the garbage.
+## This project was run through Google Colab and VSCode using the pre-set NVIDIA Jetson Nano database.
 ---
 
 ## Step 1: Training the Model in Google Colab
@@ -56,5 +57,55 @@ Run this command but replace both 'cat_dog' with 'total_data'
 This command will train the model and automatically stop at 34 epochs.
 
 ```bash
-cd pytorch-classification; python3 train.py -b 30 --model-dir=models/cat_dog data/cat_dog
+cd pytorch-classification
+python3 train.py -b 30 --model-dir=models/cat_dog data/cat_dog
 ```
+
+to:
+
+```bash
+cd pytorch-classification
+python3 train.py -b 30 --model-dir=models/total_data data/total_data
+```
+---
+
+## Step 2: Convert the Model to ONNX File in VSCode
+
+2.1: Download the Model from Google Colab
+
+Navigate to pytorch-classification/models/total_data
+
+Download the file named 'model_best.pth.tar'
+
+2.2 Upload the Model to VSCode
+
+Navigate to jetson-inference/python/training/classification/models
+
+Create a new folder called 'final_model'
+
+Upload the model 'model_best.pth.tar' into the folder 'final_model'
+
+2.3 Convert the Model to ONNX File
+
+Change directories into jetson-inference/python/training/classification with:
+
+```bash
+cd pytorch-classification/python/training/classification
+```
+
+Run the command below to convert the file:
+
+```bash
+python3 onnx_export.py --model-dir=models/final_model
+```
+---
+
+## Step 3: Creating a labels.txt File
+
+3.1 
+
+## Step 3: Test the Model with Testing Images
+
+3.1: Gather a Small Testing Dataset 
+
+Take pictures of the objects of the datasets you want to test to the model.
